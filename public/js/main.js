@@ -6,9 +6,12 @@ const chatForm = document.getElementById('chat-form');
 
 const socket = io(); 
 
-// socket쪽에 온 message(../../server.js)를 console.log로 출력
+// server쪽에 온 message(../../server.js)를 console.log로 출력
 socket.on('message', message => {
     console.log(message);
+    
+    // message를 outputMessage함수로 전달
+    outputMessage(message);
 })
 
 // 채팅 message listiner생성
@@ -27,4 +30,27 @@ chatForm.addEventListener('submit', (e) => {
     // // message가 제대로 입력이 되는지 확인하는 console.log
     // console.log(msg);
 
-})
+});
+
+// message를 Dom에 보내서 채팅창에 나타내기
+function outputMessage(message) {
+    // div 요소를 생성한다.
+    const div = document.createElement('div');
+    // class이름을 message로 한다.
+    div.classList.add('message');
+
+
+
+    // div tag안에 입력할 내용을 넣는다(message)
+    div.innerHTML = `
+        <p class = "meta">Brad <span>  </span></p>
+        <p class="text">
+        ${message}
+        </p>
+    `;
+
+    // class이름이 chat-messages에 div를 appendChild한다.(추가)
+    document.querySelector('.chat-messages').appendChild(div);
+
+
+}

@@ -1,10 +1,12 @@
 const path = require('path'); // 정적경로 불러오기
-const http = require('http');
+const http = require('http'); // http서버 만들기
 const express = require('express');
-const sockitio = require('socket.io');
+const sockitio = require('socket.io'); // socket.io 참조
 
 const app = express();
+// http서버를 만들때 app(express)을 사용
 const server = http.createServer(app);
+// io는 socket으로 설정
 const io = sockitio(server);
 
 // client쪽에서 연결시도하면 sockit io 연결
